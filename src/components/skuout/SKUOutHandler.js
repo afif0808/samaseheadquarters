@@ -1,0 +1,18 @@
+function CreateSKUOuts(skuOuts,skuOutGroup) {
+    var postData = {
+        sku_outs : skuOuts , 
+        sku_out_group : skuOutGroup,
+    }
+    var req = {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(postData)
+    }
+    console.log(req)
+
+    return fetch("http://localhost:555/skuouts",req).then(resp => resp.json())
+}
+
+export {CreateSKUOuts}

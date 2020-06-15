@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.marked {
+  background-color: #eeeeef;
+  color: #007bbf;
+}
+.sku-item {
+  cursor: pointer;
+}
+.sku-item:hover {
+  
+}
+.a-modal {
+  
+}
