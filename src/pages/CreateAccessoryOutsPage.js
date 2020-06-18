@@ -9,6 +9,7 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
 
     const [skus , setSKUs] = useState([])
     const [skuOuts , setSKUOuts] = useState({})
+    const [skuOutDate , setSKUOutDate] = useState(null)
     const [pickedSKU , setPickedSKU] = useState(null) 
     const [screen , setScreen] = useState("accessoriesList")
     const [isSaveButtonDisabled , setIsSaveButtonDisabled] = useState(Object.keys(skuOuts).length <= 0)
@@ -18,6 +19,10 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
       var sku = props.sku
       const [isSKUOut , setIsSKUOut] = useState(skuOuts[sku.id] != null)
       function handlePlusButton() {
+        setPickedSKU(sku)
+        setScreen("setSKUOutQty")
+      }
+      function handleEditButton() {
         setPickedSKU(sku)
         setScreen("setSKUOutQty")
       }
@@ -45,7 +50,7 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
       }
       function editButton() {
         if(isSKUOut) {
-          return <span className={"btn btn-primary font-weight-bold m-1"}>UBAH</span>
+          return <span onClick={handleEditButton} className={"btn btn-primary font-weight-bold m-1"}>UBAH</span>
         }
       } 
       return (
@@ -132,7 +137,7 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
     }
   }
   function SetSKUOutQtyScreen(props) {
-    const [qty , setQty] = useState(props.qty) 
+    const [qty , setQty] = useState((skuOuts[pickedSKU.id] ? skuOuts[pickedSKU.id].qty : 0)) 
     function handleSubmit(e) {
       e.preventDefault()
       addSKUOut({sku_id : pickedSKU.id , qty : parseInt(qty)})
@@ -190,19 +195,26 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
    }
    function handleSubmit(e) {
      e.preventDefault()
-      CreateSKUOuts(Object.keys(skuOuts).map(skuOut => skuOuts[skuOut]),{customer_id : parseInt(skuOutCustomerId)}).then(()=>{
-        alert("Wow")
+     var skuOutsPost  = Object.keys(skuOuts).map((i)=>{
+      skuOuts[i].date = new Date(skuOutDate)
+      alert(JSON.stringify(skuOuts[i]))
+      return skuOuts[i]
+     })
+     var skuOutgroupPost = {date : new Date(skuOutDate),customer_id : parseInt(skuOutCustomerId)}
+      CreateSKUOuts(skuOutsPost,skuOutgroupPost).then(()=>{
+        // window.location.href="/accessoryoutgroups/list"
       })
    }
     return (
         <div>
-            <h3 className="p-3">Tambah Aksesoris Keluar</h3>
+            <h3 className="p-3">Tambah Aksesoris Keluar </h3>
             <div className={"form-inline m-3"}>
                 <form onSubmit={handleSubmit}>
                   <select onChange={handleChange(setSKUOutCustomerId)} required={true} className={"form-control m-3"}>
                       <option value={""}>Pilih Vendor</option>
                       {customerOptions(customers)}
                   </select>
+                  <input type={"date"} required={true} className={"form-control m-3"} onChange={handleChange(setSKUOutDate)}   />
                   {saveButton()}
                 </form>
             </div>

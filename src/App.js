@@ -3,10 +3,11 @@ import './App.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import LeftPanel from './LeftPanel';
 import AccessoriesListPage from './pages/AccessoriesListPage'
-import AccessoryOutsListPage from './pages/AccessoryOutsListPage';
+import AccessoryOutgroupsListPage from './pages/AccessoryOutgroupsListPage'
 import CreateAccessoryOutsPage from './pages/CreateAccessoryOutsPage';
 import UpdateAccessoryPage from './pages/UpdateAccessoryPage'
 import CreateAccessoryPage from './pages/CreateAccessoryPage'
+import AcessoryOutgroupViewPage from './pages/AccessoryOutgroupViewPage';
 function App(props) {  
   return(
     <Router>
@@ -25,13 +26,18 @@ function App(props) {
                 <AccessoriesListPage />
               </Route>
               
-              <Route path="/accessoryouts/list">
-                <AccessoryOutsListPage />
+              <Route path="/accessoryoutgroups/list">
+                <AccessoryOutgroupsListPage />
               </Route>
 
-              <Route path="/accessoryouts/add">
+              <Route path="/accessoryoutgroups/add">
                 <CreateAccessoryOutsPage />
               </Route>
+
+              <Route path="/accessoryoutgroups/view">
+                <AcessoryOutgroupViewPage />              
+              </Route>
+
 
               <Route path="/accessories/create">
                 <CreateAccessoryPage />

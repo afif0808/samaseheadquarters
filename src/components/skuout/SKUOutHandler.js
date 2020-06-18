@@ -15,4 +15,8 @@ function CreateSKUOuts(skuOuts,skuOutGroup) {
     return fetch("http://localhost:555/skuouts",req).then(resp => resp.json())
 }
 
-export {CreateSKUOuts}
+function GetSKUOutsByGroupID(groupId) {
+    return fetch("http://localhost:555/skuoutgroups/" + groupId + "/skuouts").then((resp) => resp.json())
+}
+
+export {CreateSKUOuts , GetSKUOutsByGroupID}
