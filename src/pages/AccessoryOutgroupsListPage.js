@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link,BrowserRouter as Router } from 'react-router-dom'
+import { Link,BrowserRouter as Router, useHistory } from 'react-router-dom'
 import { GetSKUOutgroups } from '../components/skuoutgroup/SKUOutgroupHandler'
 import SKUOutgroupItem from '../components/skuoutgroup/SKUOutgroupItem'
 export default function AccessoryOutgroupsListPage() {
     const [skuOutgroups , setSKUOutgroups] = useState([])
+    let history = useHistory()
     useEffect(()=>{
         if(skuOutgroups.length <= 0) {
             GetSKUOutgroups().then((resp)=>{
@@ -15,7 +16,7 @@ export default function AccessoryOutgroupsListPage() {
     function handleViewButtonClick(skuOutgroup) {
         return () => {      
             sessionStorage.setItem("skuOutgroup",JSON.stringify(skuOutgroup))
-            window.location.href="/accessoryoutgroups/view"
+            history.push("/accessoryoutgroups/view")
         }
     }
 

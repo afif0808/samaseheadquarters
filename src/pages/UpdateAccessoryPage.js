@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { UpdateStockById } from '../components/stock/StockHandler'
 import { UpdateProductById } from '../components/product/ProductHandler'
 import { UpdateSKUById } from '../components/sku/SKUHandler'
+import { useHistory } from 'react-router-dom'
 
 
 export default function UpdateAccessoryPage() {
     var completeSKu = JSON.parse((sessionStorage.getItem("sku")))
+    let history = useHistory()
     const [sku , setSKU] = useState(completeSKu)
     
     function handleChange(stateSetter) {
@@ -27,7 +29,7 @@ export default function UpdateAccessoryPage() {
             
         Promise.all([UpdateStockById(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(){
             alert("Berhasil hore!")
-            window.location.href="/accessories/list"
+            history.pushState("/accessories/list")
 
         })
     }

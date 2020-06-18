@@ -1,10 +1,11 @@
 import React ,{useState,useEffect} from 'react'
 // import SKUList from '../components/sku/SKUList'
 import {GetSKUs , DeleteSKUById} from '../components/sku/SKUHandler'
-import { Link,BrowserRouter as Router } from 'react-router-dom'
+import { Link,BrowserRouter as Router, useHistory } from 'react-router-dom'
 
 function SKUItem(props) {
   var sku = props.sku
+  let history = useHistory()
   const handleDeleteButton = props.handleDeleteButton 
   return (
     <tr>
@@ -13,9 +14,12 @@ function SKUItem(props) {
       <td>{sku.stock.qty}</td>
       <td>
         {/* <span disabled={true} onClick={()=>{handleDeleteButton(sku.id)}} className={"btn btn-light"}>Hapus</span> */}
-        <span  onClick={()=>{
-          sessionStorage.setItem("sku",JSON.stringify(sku));
-          window.location.href="/accessories/update"}} className={"btn btn-outline-primary font-weight-bold"}>UBAH</span>
+        <span 
+          onClick={()=>{
+            sessionStorage.setItem("sku",JSON.stringify(sku));
+            history.push("/accessories/update")
+          }} 
+          className={"btn btn-outline-primary font-weight-bold"}>UBAH</span>
       </td>
     </tr>
   )
