@@ -7,13 +7,16 @@ export default function SKUItem(props) {
             props.handleClick(sku)
         }
     }
+    var children = props.children
     
     return (
         <tr className={className} onClick={handleClick}>
             <td>{sku.product.name}</td>
             <td>{sku.code}</td>
             <td>{sku.stock.qty}</td>
-            <td>{props.customCol}</td>
+            <td>
+                {children}
+            </td>
         </tr>
     )
 }

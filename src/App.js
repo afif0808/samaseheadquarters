@@ -8,6 +8,8 @@ import CreateAccessoryOutsPage from './pages/CreateAccessoryOutsPage';
 import UpdateAccessoryPage from './pages/UpdateAccessoryPage'
 import CreateAccessoryPage from './pages/CreateAccessoryPage'
 import AcessoryOutgroupViewPage from './pages/AccessoryOutgroupViewPage';
+import UpdateAccessoryOutgroupPage from './pages/UpdateAccsessoryOutgroupPage';
+import PageLoader from './PageLoader';
 function App(props) {  
   return(
     <Router>
@@ -23,28 +25,33 @@ function App(props) {
               
   <Route path="/home">Beranda</Route>
               <Route path="/accessories/list">
-                <AccessoriesListPage />
+                <AccessoriesListPage loader={PageLoader} />
               </Route>
               
               <Route path="/accessoryoutgroups/list">
-                <AccessoryOutgroupsListPage />
+                <AccessoryOutgroupsListPage loader={PageLoader}  />
               </Route>
 
               <Route path="/accessoryoutgroups/add">
-                <CreateAccessoryOutsPage />
+                <CreateAccessoryOutsPage loader={PageLoader}  />
               </Route>
 
               <Route path="/accessoryoutgroups/view">
-                <AcessoryOutgroupViewPage />              
+                <AcessoryOutgroupViewPage loader={PageLoader}  />              
               </Route>
 
 
               <Route path="/accessories/create">
-                <CreateAccessoryPage />
+                <CreateAccessoryPage loader={PageLoader}  />
               </Route>
               <Route path="/accessories/update">
-                <UpdateAccessoryPage />
+                <UpdateAccessoryPage loader={PageLoader}  />
               </Route>
+
+              <Route path="/accessoryoutgroups/update">
+                <UpdateAccessoryOutgroupPage loader={PageLoader}  />
+              </Route>
+
             </div>
           </div>
         </div>

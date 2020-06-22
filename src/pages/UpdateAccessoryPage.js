@@ -29,7 +29,7 @@ export default function UpdateAccessoryPage() {
             
         Promise.all([UpdateStockById(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(){
             alert("Berhasil hore!")
-            history.pushState("/accessories/list")
+            history.push("/accessories/list")
 
         })
     }

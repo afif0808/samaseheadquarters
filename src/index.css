@@ -25,3 +25,31 @@ code {
 .a-modal {
   
 }
+
+.black-screen {
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%; 
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+}
+
+@keyframes loaderAnimation {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
+}
+.loader {
+  width: 250px;
+  height: 250px;
+  animation: loaderAnimation 2s linear infinite;
+  border-radius: 50%;
+  border:solid 10px #fff;
+  border-top:solid 10px #000;
+
+}

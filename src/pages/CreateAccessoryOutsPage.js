@@ -4,10 +4,12 @@ import {CreateSKUOuts} from '../components/skuout/SKUOutHandler'
 
 import QtyFormModal from '../QtyFormModal'
 import { GetCustomers } from '../components/customer/CustomerHandler' 
+import { useHistory } from 'react-router-dom'
+import SearchBox from '../SearchBox'
 
   export default function CreateAccessoryOutsPage() {
 
-    const [skus , setSKUs] = useState([])
+    const [skus , setSKUs] = useState(null)
     const [skuOuts , setSKUOuts] = useState({})
     const [skuOutDate , setSKUOutDate] = useState(null)
     const [pickedSKU , setPickedSKU] = useState(null) 
@@ -73,7 +75,9 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
       const screenSetter = props.screenSetter
   
       function skuItems() {
-        return skus.map((sku)=> <SKUItem  screenSetter={screenSetter}  sku={sku} /> )
+        if(skus != null ){
+          return skus.map((sku)=> <SKUItem  screenSetter={screenSetter}  sku={sku} /> )
+        }
       }
     
       return (
@@ -106,7 +110,7 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
     }
 
     useEffect(()=>{
-      if(skus.length == 0) {
+      if(skus == null) {
         GetSKUs().then(function(resp){
           setSKUs(resp)
         })
@@ -193,18 +197,25 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
         return <button disabled={true} type={"submit"} className={"btn btn-primary font-weight-bold"}>SIMPAN</button>
      }
    }
+   let history = useHistory()
+
    function handleSubmit(e) {
      e.preventDefault()
      var skuOutsPost  = Object.keys(skuOuts).map((i)=>{
       skuOuts[i].date = new Date(skuOutDate)
-      alert(JSON.stringify(skuOuts[i]))
       return skuOuts[i]
      })
      var skuOutgroupPost = {date : new Date(skuOutDate),customer_id : parseInt(skuOutCustomerId)}
       CreateSKUOuts(skuOutsPost,skuOutgroupPost).then(()=>{
         // window.location.href="/accessoryoutgroups/list"
+        history.push("/accessoryoutgroups/list")
       })
    }
+   function handleSearchSubmit(data) {
+    GetSKUs(data.keyword).then((resp)=>{
+        setSKUs(resp)
+    })
+}
     return (
         <div>
             <h3 className="p-3">Tambah Aksesoris Keluar </h3>
@@ -218,6 +229,7 @@ import { GetCustomers } from '../components/customer/CustomerHandler'
                   {saveButton()}
                 </form>
             </div>
+            <SearchBox handleSubmit={handleSearchSubmit}  />
             {showScreen(screen)}        
         </div> 
     )
