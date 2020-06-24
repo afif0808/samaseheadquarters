@@ -15,15 +15,13 @@ function App(props) {
     <Router>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-2">
+          <div className="col-lg-2 col-md-12">
             <LeftPanel />
           </div>
-          <div className="col-10">
+          <div className="col-lg-10 col-md-12">
             <div className="col-12">
               
-            
-              
-  <Route path="/home">Beranda</Route>
+              <Route path="/home">Beranda</Route>
               <Route path="/accessories/list">
                 <AccessoriesListPage loader={PageLoader} />
               </Route>

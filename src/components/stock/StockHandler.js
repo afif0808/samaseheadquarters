@@ -6,7 +6,7 @@ function UpdateStockById(stock) {
         },
         body : JSON.stringify({stock:stock}),
     }
-    return fetch("http://localhost:555/stocks/" + stock.id , req).then((resp)=>resp.json())
+    return fetch("http://161.35.98.104:555/stocks/" + stock.id , req).then((resp)=>resp.json())
 }
 
 export {UpdateStockById}

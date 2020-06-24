@@ -24,6 +24,7 @@ const loaderStyle = {
 
 export default function PageLoader(props) {
     const Page = props.page
+    
     function loader() {
         return (
             <div style={whiteScreenStyle}>
@@ -35,5 +36,9 @@ export default function PageLoader(props) {
             </div>
         )    
     }
-    return loader()
+    if(props.visible) {
+        return loader()
+    } {
+        return null
+    }
 }

@@ -57,12 +57,14 @@ function SKUList(props) {
 export default function AccessoriesListPage(props) {
     const [skus , setSKUs] = useState(null)
     const [loaded , setLoaded] = useState(false)
+    const [loaderVisible , setLoaderVisible] = useState(false)
     const [isAnyError , setIsAnyError] = useState(false)
     const Loader = props.loader
     useEffect(()=>{
       if(!skus) {
+        setLoaderVisible(true)
         GetSKUs("").then(function(resp){
-          
+          setLoaderVisible(false)
           setSKUs(resp)
           setLoaded(true)
 
@@ -78,22 +80,24 @@ export default function AccessoriesListPage(props) {
       })
     }
     function handleSearchSubmit(data) {
+      setLoaderVisible(true)
       GetSKUs(data.keyword).then(function(resp){
         setSKUs(resp)
+        setLoaderVisible(false)
       })
-    }    
-    if(loaded && !isAnyError) {
-      return (
-        <div>
+    }
+    return (
+      <div>
+            <Loader visible={loaderVisible} />
+            <WhiteScreen visible={isAnyError}>
+            {/* <a href='https://www.freepik.com/free-photos-vectors/background'> */}
+              <img src={"/assets/image/error_404.jpg"}  height={"100%"} />
+            {/* </a> */}
+            </WhiteScreen>
             <h3 className="p-3">Aksesoris</h3>
             <Link className="btn btn-primary m-3" to={"/accessories/create"}>Tambah</Link>
             <SearchBox handleSubmit={handleSearchSubmit} />
             <SKUList handleDeleteButton={handleDeleteButton} skus={skus} />           
         </div> 
-      )
-    } else if(isAnyError) {
-      return <WhiteScreen><h1>Maaf , ada masalah . Coba muat kembali lagi aja</h1></WhiteScreen>
-    } else {
-      return <Loader />
-    }   
+    )    
 }

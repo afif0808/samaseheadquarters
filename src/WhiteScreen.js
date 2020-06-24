@@ -13,9 +13,13 @@ export default function WhiteScreen(props) {
         "justifyContent" : "center",
         "alignItems" : "center",
     }
-    return (
-        <div style={style}>
-            {props.children}
-        </div>
-    )
+    if(props.visible) {
+        return (
+            <div style={style}>
+                {props.children}
+            </div>
+        )            
+    } else {
+        return null
+    }
 }
