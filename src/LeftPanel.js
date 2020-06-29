@@ -9,6 +9,7 @@ export default function LeftPanel(props) {
             {value : "Beranda",href:"/home"},
             {value : "Aksesoris",href:"/accessories/list"},
             {value : "Aksesoris Keluar",href:"/accessoryoutgroups/list"},
+            {value : "Pengingat Stok",href:"/accessories/stockalert"},
         ]
     }
     function menuItemList() {

@@ -10,15 +10,16 @@ import CreateAccessoryPage from './pages/CreateAccessoryPage'
 import AcessoryOutgroupViewPage from './pages/AccessoryOutgroupViewPage';
 import UpdateAccessoryOutgroupPage from './pages/UpdateAccsessoryOutgroupPage';
 import PageLoader from './PageLoader';
+import AccessoriesLowStockPage from './pages/AccessoriesLowStockPage';
 function App(props) {  
   return(
     <Router>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-lg-2 col-md-12">
+          <div className="col-lg-2 col-md-11">
             <LeftPanel />
           </div>
-          <div className="col-lg-10 col-md-12">
+          <div className="col-lg-9 col-md-11">
             <div className="col-12">
               
               <Route path="/home">Beranda</Route>
@@ -48,6 +49,9 @@ function App(props) {
 
               <Route path="/accessoryoutgroups/update">
                 <UpdateAccessoryOutgroupPage loader={PageLoader}  />
+              </Route>
+              <Route path="/accessories/stockalert">
+                <AccessoriesLowStockPage />
               </Route>
 
             </div>

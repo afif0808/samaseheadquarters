@@ -3,69 +3,53 @@ import { UpdateStockById } from '../components/stock/StockHandler'
 import { UpdateProductById } from '../components/product/ProductHandler'
 import { UpdateSKUById } from '../components/sku/SKUHandler'
 import { useHistory } from 'react-router-dom'
+import AccessoryForm from '../accessory/AccessoryForm'
 
 
 export default function UpdateAccessoryPage() {
     var completeSKu = JSON.parse((sessionStorage.getItem("sku")))
     let history = useHistory()
     const [sku , setSKU] = useState(completeSKu)
-    
-    function handleChange(stateSetter) {
+    function handleEditFormSubmit() {
         return (e) => {
-            stateSetter(e.target.value)
-        }        
+            e.preventDefault()
+            Promise.all([UpdateStockById(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(resp){
+                alert("Berhasil hore!")
+                history.push("/accessories/list")
+                console.log(resp)
+            })    
+        }
     }
-    function handleChangeProductName(e) {
-        sku.product.name = e.target.value
+    function handleEditFormChange(data) {
+        sku.product.name = data.name
+        sku.code = data.code
+        sku.stock.qty = parseInt(data.qty)
+        sku.stock.minimum_qty = parseInt(data.minimumQty)
+        
     }
-    function handleChangeSKUCode(e) {
-        sku.code = e.target.value
-    }
-    function handleChangeStockQty(e) {
-        sku.stock.qty = parseInt(e.target.value)
-    }
-    function handleSubmit(e) {
-        e.preventDefault()
-            
-        Promise.all([UpdateStockById(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(){
-            alert("Berhasil hore!")
-            history.push("/accessories/list")
 
-        })
-    }
     return (
         <div>
-            <h3 className="m-3">Ubah Aksesoris</h3>
-            <form onSubmit={handleSubmit}>               
-                <table className={"table"}>
+            <h3 className={"m-3"}>Ubah Aksesoris</h3>
+            <div>
+            </div>
+            <form onSubmit={handleEditFormSubmit()} >
+                <AccessoryForm 
+                    handleFormChange={handleEditFormChange}
+                    className={"table"}
+                    minimumQty={sku.stock.minimum_qty}
+                    qty={sku.stock.qty}
+                    code={sku.code}
+                    name={sku.product.name}>
                     <tr>
-                        <td>Nama</td>
-                        <td>
-                            <input  onChange={handleChangeProductName} required={true} type={"text"} defaultValue={sku.product.name} className={"form-control"} />
+                        <td colSpan={"100%"}>
+                            <button className={"btn btn-primary m-2"}>SIMPAN</button>
+                            <span onClick={()=>{window.history.back()}} className={"btn btn-outline-primary m-2"}>BATAL</span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Kode</td>
-                        <td>
-                            <input  onChange={handleChangeSKUCode} required={true} type={"text"} defaultValue={sku.code} className={"form-control"} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Stok</td>
-                        <td>
-                            <input  onChange={handleChangeStockQty} required={true} type={"number"} defaultValue={sku.stock.qty} className={"form-control"} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan={"2"}>
-                            <button className={"btn btn-primary font-weight-bold m-1"} type={"submit"}>SIMPAN</button>
-                            <span className={"btn btn-outline-primary font-weight-bold m-1"} onClick={()=>{window.history.back()}}>BATAL</span>
-                        </td>
-                    </tr>
-
-                </table>
+                </AccessoryForm>
             </form>
-
+            
         </div>
     )       
 }

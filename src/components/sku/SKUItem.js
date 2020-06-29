@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react'
 export default function SKUItem(props) {
     var sku = props.sku
-    var className = props.className
+    var className =  (props.className != null) ? props.className : "" 
     function handleClick() {
         if(props.handleClick) {
             props.handleClick(sku)

@@ -201,6 +201,7 @@ import SearchBox from '../SearchBox'
 
    function handleSubmit(e) {
      e.preventDefault()
+     setIsSaveButtonDisabled(true)
      var skuOutsPost  = Object.keys(skuOuts).map((i)=>{
       skuOuts[i].date = new Date(skuOutDate)
       return skuOuts[i]
