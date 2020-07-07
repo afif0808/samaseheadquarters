@@ -18,9 +18,6 @@ export default function CreateAccessory(props) {
     }
 
     const [accessory , setAccessory] = useState(defaultAccessory)
-    useEffect(()=>{
-        alert("it's changed")
-    },[accessory])
     const [saveButtonDisabled , setSaveButtonDisabled] = useState(false)
     const [accsessoryFormVisible , setAccessoryFormVisible] = useState(true)
     function handleCreateFormSubmit() {

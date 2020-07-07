@@ -91,9 +91,9 @@ export default function AccessoriesListPage(props) {
     }
 
     function deleteAccessory(sku) {
-      
       DeleteSKUById(parseInt(sku.id)).then(function(resp){
         alert(JSON.stringify(resp))
+        searchSKUs(skuKeyword)
       })
     }
 
@@ -121,7 +121,7 @@ export default function AccessoriesListPage(props) {
         <h3 className="p-3">Aksesoris</h3>
         <Link className="btn btn-primary m-3" to={"/accessories/create"}>Tambah</Link>
         <SearchBox handleSubmit={handleSearchSubmit} />
-
+        
         <SKUList 
         className={"table"}
         headRows={skuListHead()}>

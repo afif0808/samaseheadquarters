@@ -10,17 +10,17 @@ function CreateSKUOuts(skuOuts,skuOutGroup) {
         },
         body : JSON.stringify(postData)
     }
+    
     console.log(req)
-
-    return fetch("http://161.35.98.104:555/skuouts",req).then(resp => resp.json())
+    return fetch("http://localhost:555/skuouts",req).then(resp => resp.json())
 }
 
 function GetSKUOutsByGroupID(groupId) {
-    return fetch("http://161.35.98.104:555/skuoutgroups/" + groupId + "/skuouts").then((resp) => resp.json())
+    return fetch("http://localhost:555/skuoutgroups/" + groupId + "/skuouts").then((resp) => resp.json())
 }
 
 function DeleteSKUOutByID(id) {
-    return fetch("http://161.35.98.104:555/skuouts/" + id,{method:"DELETE"}).then(resp => resp.json())
+    return fetch("http://localhost:555/skuouts/" + id,{method:"DELETE"}).then(resp => resp.json())
 }
 
 function UpdateSKUOutByID(skuOut) {
@@ -31,6 +31,6 @@ function UpdateSKUOutByID(skuOut) {
         },
         body : JSON.stringify({sku_out:skuOut}),
     }
-    return fetch("http://161.35.98.104:555/skuouts/" + skuOut.id,req).then(resp => resp.json())
+    return fetch("http://localhost:555/skuouts/" + skuOut.id,req).then(resp => resp.json())
 }
 export {CreateSKUOuts , GetSKUOutsByGroupID , DeleteSKUOutByID, UpdateSKUOutByID}

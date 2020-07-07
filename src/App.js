@@ -11,6 +11,10 @@ import AcessoryOutgroupViewPage from './pages/AccessoryOutgroupViewPage';
 import UpdateAccessoryOutgroupPage from './pages/UpdateAccsessoryOutgroupPage';
 import PageLoader from './PageLoader';
 import AccessoriesLowStockPage from './pages/AccessoriesLowStockPage';
+import AccessoryInGroupListPage from './pages/AccessoryInGroupsListPage';
+import CreateAccessoryInsPage from './pages/CreateAccessoryInsPage';
+import AccessoryInGroupViewPage from './pages/AccessoryInGroupViewPage';
+import UpdateAccessoryInsPage from './pages/UpdateAccessoryInsPage';
 function App(props) {  
   return(
     <Router>
@@ -52,6 +56,21 @@ function App(props) {
               </Route>
               <Route path="/accessories/stockalert">
                 <AccessoriesLowStockPage />
+              </Route>
+
+              <Route path={"/accessoryingroups/list"}>
+                <AccessoryInGroupListPage />
+              </Route>
+              <Route path={"/accessoryingroups/add"}>
+                <CreateAccessoryInsPage />
+              </Route>
+
+              <Route path={"/accessoryingroups/view"}>
+                <AccessoryInGroupViewPage />
+              </Route>
+
+              <Route path={"/accessoryingroups/update"}>
+                <UpdateAccessoryInsPage />
               </Route>
 
             </div>

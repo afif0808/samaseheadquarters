@@ -1,15 +1,14 @@
-function GetSKUs(name) {
+async function GetSKUs(name) {
     if(!name) {
         name = ""
     }
-    return fetch("http://161.35.98.104:555/skus?name=" + name).then((resp)=>{
-        if(!resp.ok) {
-            throw new Error("Request failed")
-        }
-        return resp.json()
-    })
+    const resp = await fetch("http://localhost:555/skus?name=" + name)
+    if (!resp.ok) {
+        throw new Error("Request failed")
+    }
+    return resp.json()
 }
-function CreateSKus(postData){
+async function CreateSKus(postData){
     var req = {
         method : "POST",
         headers : {
@@ -17,13 +16,15 @@ function CreateSKus(postData){
         },
         body : JSON.stringify(postData)
     }
-    return fetch("http://161.35.98.104:555/skus",req).then(resp => resp.json())
+    const resp = await fetch("http://localhost:555/skus", req)
+    return await resp.json()
 
 }
-function DeleteSKUById(skuId) {
-    return fetch("http://161.35.98.104:555/skus/" + skuId , {method:"DELETE"}).then(resp => resp.json())
+async function DeleteSKUById(skuId) {
+    const resp = await fetch("http://localhost:555/skus/" + skuId, { method: "DELETE" })
+    return await resp.json()
 }
-function UpdateSKUById(sku) {     
+async function UpdateSKUById(sku) {     
     var req = {
         method : "POST",
         headers : {
@@ -31,11 +32,13 @@ function UpdateSKUById(sku) {
         },
         body : JSON.stringify({sku : sku}),
     }
-    return fetch("http://161.35.98.104:555/skus/" + sku.id,req).then(resp => resp.json())
+    const resp = await fetch("http://localhost:555/skus/" + sku.id, req)
+    return await resp.json()
 }
 
-function GetLowStockSKUs() {
-    return fetch("http://161.35.98.104:555/skus/lowstocks/").then(resp => resp.json())
+async function GetLowStockSKUs() {
+    const resp = await fetch("http://localhost:555/skus/lowstocks/")
+    return await resp.json()
 
 }
 export {GetSKUs , CreateSKus , DeleteSKUById, UpdateSKUById , GetLowStockSKUs} 
