@@ -1,7 +1,9 @@
+import { Config } from "../../Config"
+
 function GetSKUOutgroups() {
-   return fetch("http://localhost:555/skuoutgroups").then((resp) => resp.json()) 
+   return fetch(Config.apiSource+"/skuoutgroups").then((resp) => resp.json()) 
 }
 function DeleteSKUOutGroup(skuOutgroup) {
-   return fetch("http://localhost:555/skuoutgroups/" + skuOutgroup.id,{method:"DELETE"}).then(resp => resp.json())
+   return fetch(Config.apiSource+"/skuoutgroups/" + skuOutgroup.id,{method:"DELETE"}).then(resp => resp.json())
 }
 export {GetSKUOutgroups , DeleteSKUOutGroup}

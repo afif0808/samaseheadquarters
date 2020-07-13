@@ -1,3 +1,5 @@
+import { Config } from "../../Config"
+
 function CreateSKUOuts(skuOuts,skuOutGroup) {
     var postData = {
         sku_outs : skuOuts , 
@@ -12,15 +14,15 @@ function CreateSKUOuts(skuOuts,skuOutGroup) {
     }
     
     console.log(req)
-    return fetch("http://localhost:555/skuouts",req).then(resp => resp.json())
+    return fetch(Config.apiSource+"/skuouts",req).then(resp => resp.json())
 }
 
 function GetSKUOutsByGroupID(groupId) {
-    return fetch("http://localhost:555/skuoutgroups/" + groupId + "/skuouts").then((resp) => resp.json())
+    return fetch(Config.apiSource+"/skuoutgroups/" + groupId + "/skuouts").then((resp) => resp.json())
 }
 
 function DeleteSKUOutByID(id) {
-    return fetch("http://localhost:555/skuouts/" + id,{method:"DELETE"}).then(resp => resp.json())
+    return fetch(Config.apiSource+"/skuouts/" + id,{method:"DELETE"}).then(resp => resp.json())
 }
 
 function UpdateSKUOutByID(skuOut) {
@@ -31,6 +33,6 @@ function UpdateSKUOutByID(skuOut) {
         },
         body : JSON.stringify({sku_out:skuOut}),
     }
-    return fetch("http://localhost:555/skuouts/" + skuOut.id,req).then(resp => resp.json())
+    return fetch(Config.apiSource+"/skuouts/" + skuOut.id,req).then(resp => resp.json())
 }
 export {CreateSKUOuts , GetSKUOutsByGroupID , DeleteSKUOutByID, UpdateSKUOutByID}

@@ -15,6 +15,10 @@ import AccessoryInGroupListPage from './pages/AccessoryInGroupsListPage';
 import CreateAccessoryInsPage from './pages/CreateAccessoryInsPage';
 import AccessoryInGroupViewPage from './pages/AccessoryInGroupViewPage';
 import UpdateAccessoryInsPage from './pages/UpdateAccessoryInsPage';
+import VendorsListPage from './pages/VendorsListPage';
+import CreateVendorPage from './pages/CreateVendorPage';
+import SupplierListPage from './pages/SupplierListPage';
+import CreateSupplierPage from './pages/CreateSupplierPage';
 function App(props) {  
   return(
     <Router>
@@ -71,6 +75,19 @@ function App(props) {
 
               <Route path={"/accessoryingroups/update"}>
                 <UpdateAccessoryInsPage />
+              </Route>
+              
+              <Route path={"/vendors/list"}>
+                <VendorsListPage loader={PageLoader} />
+              </Route>
+              <Route path={"/vendors/create"}>
+                <CreateVendorPage loader={PageLoader} />
+              </Route>
+              <Route path={"/suppliers/list"}>
+                <SupplierListPage loader={PageLoader}/>
+              </Route>
+              <Route path={"/suppliers/create"}>
+                <CreateSupplierPage loader={PageLoader}/>
               </Route>
 
             </div>

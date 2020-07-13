@@ -53,17 +53,17 @@ export default function AccessoriesListPage(props) {
       }
 
       if(skus != null) {
-
         return skus.map((sku) => {
+          // var className = ""
           var className = (sku.stock.qty <= sku.stock.minimum_qty) ? "text-danger font-weight-bold" : ""
           return (
              <SKUItem className={className} sku={sku}>
                <button 
                 onClick={handleEditButtonClick(sku)} 
-                className={"btn btn-primary m-2"}>
+                className={"btn btn-primary m-2 d-none d-md-block"}>
                  UBAH
                </button>
-              <button 
+              {/* <button 
                 onClick={()=>{
                     setPickedSKU(sku)
                     setDeleteModalVisible(true)
@@ -71,7 +71,7 @@ export default function AccessoriesListPage(props) {
                 }
                 className={"btn btn-outline-primary  m-2"}>
                  HAPUS
-              </button>
+              </button> */}
              </SKUItem>
           ) 
          })

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Config } from '../../Config'
 async function CreateSKUIns(skuIns , skuInGroup) {
     const post = {
         method : "POST",
@@ -9,11 +9,11 @@ async function CreateSKUIns(skuIns , skuInGroup) {
         body : JSON.stringify({sku_ins : skuIns,sku_in_group :skuInGroup}),
     }
     console.log(skuIns,skuInGroup)
-    const resp = await fetch("http://localhost:555/skuins",post)
+    const resp = await fetch(Config.apiSource+"/skuins",post)
     return await resp.json()
 }
 async function GetSKUInsByGroupID(groupID) {
-    const resp = await fetch("http://localhost:555/skuingroups/" + groupID +  "/skuins")
+    const resp = await fetch(Config.apiSource+"/skuingroups/" + groupID +  "/skuins")
     if(resp.ok == false) {
         throw Error("")
     }
@@ -21,7 +21,7 @@ async function GetSKUInsByGroupID(groupID) {
 }
 
 async function DeleteSKUInByID(id) {
-    const resp = await fetch("http://localhost:555/skuins/" + id, { method: "DELETE" })
+    const resp = await fetch(Config.apiSource+"/skuins/" + id, { method: "DELETE" })
     return await resp.json()
 }
 
@@ -33,7 +33,7 @@ async function UpdateSKUInByID(id,skuIn) {
         },
         body : JSON.stringify({sku_in : skuIn})
     }
-    const resp = await fetch("http://localhost:555/skuins/" + id, post)
+    const resp = await fetch(Config.apiSource+"/skuins/" + id, post)
     return await resp.json()
 }
 

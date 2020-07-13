@@ -1,3 +1,5 @@
+import { Config } from "../../Config"
+
 function UpdateStockById(stock) {
     var req = {
         method : "POST",
@@ -6,7 +8,7 @@ function UpdateStockById(stock) {
         },
         body : JSON.stringify({stock:stock}),
     }
-    return fetch("http://localhost:555/stocks/" + stock.id , req).then((resp)=>resp.json())
+    return fetch(Config.apiSource+"/stocks/" + stock.id , req).then((resp)=>resp.json())
 }
 
 export {UpdateStockById}

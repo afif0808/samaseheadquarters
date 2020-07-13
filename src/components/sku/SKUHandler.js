@@ -1,8 +1,10 @@
+import { Config } from "../../Config"
+
 async function GetSKUs(name) {
     if(!name) {
         name = ""
     }
-    const resp = await fetch("http://localhost:555/skus?name=" + name)
+    const resp = await fetch(Config.apiSource+"/skus?name=" + name)
     if (!resp.ok) {
         throw new Error("Request failed")
     }
@@ -16,12 +18,12 @@ async function CreateSKus(postData){
         },
         body : JSON.stringify(postData)
     }
-    const resp = await fetch("http://localhost:555/skus", req)
+    const resp = await fetch(Config.apiSource+"/skus", req)
     return await resp.json()
 
 }
 async function DeleteSKUById(skuId) {
-    const resp = await fetch("http://localhost:555/skus/" + skuId, { method: "DELETE" })
+    const resp = await fetch(Config.apiSource+"/skus/" + skuId, { method: "DELETE" })
     return await resp.json()
 }
 async function UpdateSKUById(sku) {     
@@ -32,12 +34,12 @@ async function UpdateSKUById(sku) {
         },
         body : JSON.stringify({sku : sku}),
     }
-    const resp = await fetch("http://localhost:555/skus/" + sku.id, req)
+    const resp = await fetch(Config.apiSource+"/skus/" + sku.id, req)
     return await resp.json()
 }
 
 async function GetLowStockSKUs() {
-    const resp = await fetch("http://localhost:555/skus/lowstocks/")
+    const resp = await fetch(Config.apiSource+"/skus/lowstocks/")
     return await resp.json()
 
 }

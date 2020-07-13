@@ -11,6 +11,8 @@ export default function LeftPanel(props) {
             {value : "Aksesoris Keluar",href:"/accessoryoutgroups/list"},
             {value : "Aksesoris Masuk",href:"/accessoryingroups/list"},
             {value : "Pengingat Stok",href:"/accessories/stockalert"},
+            {value : "Vendor",href:"/vendors/list"},
+            {value : "Suplier",href:"/suppliers/list"},
         ]
     }
     function menuItemList() {
