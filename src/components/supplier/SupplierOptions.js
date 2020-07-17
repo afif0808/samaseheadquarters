@@ -15,9 +15,16 @@ export default function SupplierOptions(props) {
 
     if(props.suppliers != null) {
         return (
-            <select disabled={props.disabled} required={props.required} onChange={props.onChange} className={className} value={props.selected}>
-                <option value={""}>Pilih Suplier</option>
-                {options(props.suppliers)}
+            <select
+                disabled={props.disabled} 
+                required={props.required} 
+                onChange={props.onChange} 
+                className={className} 
+                value={props.selected}>
+
+                    <option value={""}>Pilih Suplier</option>
+                    {options(props.suppliers)}
+            
             </select>
         )
     } else {
