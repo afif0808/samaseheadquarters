@@ -131,9 +131,10 @@ export default function CreateAccessoryInsPage() {
                 }
                 return (
                     <SKUItem className={className} sku={sku}>
-                        
-                        {editAndDeleteButton(sku)}
-                        {addButton(sku)}
+                        <td>
+                            {editAndDeleteButton(sku)}
+                            {addButton(sku)}
+                        </td>
 
                     </SKUItem>
                 )

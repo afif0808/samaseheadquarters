@@ -63,11 +63,13 @@ export default function AccessoriesListPage(props) {
           var className = (sku.stock.qty <= sku.stock.minimum_qty) ? "text-danger font-weight-bold" : ""
           return (
              <SKUItem className={className} sku={sku}>
-               <button 
-                onClick={handleEditButtonClick(sku)} 
-                className={"btn btn-primary m-2 d-none d-md-block"}>
-                 UBAH
-               </button>
+               <td>
+                <button 
+                  onClick={handleEditButtonClick(sku)} 
+                  className={"btn btn-primary m-2 d-none d-md-block"}>
+                  UBAH
+                </button>
+               </td>
               {/* <button 
                 onClick={()=>{
                     setPickedSKU(sku)

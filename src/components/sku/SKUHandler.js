@@ -4,7 +4,7 @@ async function GetSKUs(name) {
     if(!name) {
         name = ""
     }
-    const resp = await fetch(Config.apiSource+"/skus?name=" + name)
+    const resp = await fetch(Config.apiSource+"/skus?q=" + name)
     if (!resp.ok) {
         throw new Error("Request failed")
     }

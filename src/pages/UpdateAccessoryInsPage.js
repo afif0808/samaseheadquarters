@@ -102,7 +102,7 @@ export default function UpdateAccessoryInsPage() {
 
     function skuItems(skus) {
         function editAndDeleteButton(sku) {
-            if(skuIns[sku.id] != null || newSKUIns[sku.id] != null) {
+            if(skuIns != null && skuIns[sku.id] != null || newSKUIns[sku.id] != null) {
                 return (
                     <span>
                         <span 
@@ -150,7 +150,7 @@ export default function UpdateAccessoryInsPage() {
             }
         }
         function addButton(sku) {
-            if(skuIns[sku.id] == null && newSKUIns[sku.id] == null) {
+            if(skuIns != null && skuIns[sku.id] == null && newSKUIns[sku.id] == null) {
                 return (
                     <span
                         onClick={()=>{
@@ -166,14 +166,16 @@ export default function UpdateAccessoryInsPage() {
         if(skus != null) {
             return skus.map((sku) => {
                 var className = ""
-                if(skuIns[sku.id] != null || newSKUIns[sku.id] != null) {
+                if(skuIns != null && skuIns[sku.id] != null || newSKUIns[sku.id] != null) {
                     var className = "text-primary font-weight-bold"
                 }
                 return (
                     <SKUItem className={className} sku={sku}>
-                        
+                        <td>
                         {editAndDeleteButton(sku)}
                         {addButton(sku)}
+
+                        </td>
 
                     </SKUItem>
                 )

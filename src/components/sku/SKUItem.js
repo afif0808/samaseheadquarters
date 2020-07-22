@@ -14,9 +14,7 @@ export default function SKUItem(props) {
             <td>{sku.product.name}</td>
             <td>{sku.code}</td>
             <td>{sku.stock.qty}</td>
-            <td>
-                {children}
-            </td>
+            {children}
         </tr>
     )
 }

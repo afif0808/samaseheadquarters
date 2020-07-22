@@ -4,6 +4,7 @@ import { UpdateProductById } from '../components/product/ProductHandler'
 import { UpdateSKUById } from '../components/sku/SKUHandler'
 import { useHistory } from 'react-router-dom'
 import AccessoryForm from '../accessory/AccessoryForm'
+import { UpdateSKUPrice } from '../components/skuprice/SKUPriceHandler'
 
 
 export default function UpdateAccessoryPage() {
@@ -13,7 +14,9 @@ export default function UpdateAccessoryPage() {
     function handleEditFormSubmit() {
         return (e) => {
             e.preventDefault()
-            Promise.all([UpdateStockBySKUId(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(resp){
+            Promise.all([
+                UpdateStockBySKUId(sku.stock),UpdateSKUPrice(sku.price),
+                UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(resp){
                 alert("Berhasil hore!")
                 history.push("/accessories/list")
                 console.log(resp)
@@ -25,7 +28,8 @@ export default function UpdateAccessoryPage() {
         sku.code = data.code
         sku.stock.qty = parseInt(data.qty)
         sku.stock.minimum_qty = parseInt(data.minimumQty)
-        
+        sku.price.buying_price = parseInt(data.buyingPrice)
+        sku.price.selling_price = parseInt(data.sellingPrice)
     }
 
     return (
@@ -40,6 +44,8 @@ export default function UpdateAccessoryPage() {
                     minimumQty={sku.stock.minimum_qty}
                     qty={sku.stock.qty}
                     code={sku.code}
+                    sellingPrice={(sku.price != null) ? sku.price.selling_price : 0}
+                    buyingPrice={(sku.price != null) ? sku.price.buying_price : 0}
                     name={sku.product.name}>
                     <tr>
                         <td colSpan={"100%"}>

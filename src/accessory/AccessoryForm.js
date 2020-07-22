@@ -6,6 +6,9 @@ export default function AccessoryForm(props) {
     const [code , setCode] = useState(props.code)
     const [qty , setQty] = useState(props.qty)
     const [minimumQty , setMinimumQty] = useState(props.minimumQty)
+    const [buyingPrice , setBuyingPrice] = useState(props.buyingPrice)
+    const [sellingPrice , setSellingPrice] = useState(props.sellingPrice)
+
     const[data , setData ] = useState({})
     const visible = (props.visible == null) ? true : props.visible
     useEffect(()=>{
@@ -13,6 +16,8 @@ export default function AccessoryForm(props) {
         data.qty = qty
         data.code = code
         data.minimumQty = minimumQty
+        data.buyingPrice = buyingPrice
+        data.sellingPrice = sellingPrice
         if(props.handleFormChange) {
             props.handleFormChange(data)
         }
@@ -72,6 +77,29 @@ export default function AccessoryForm(props) {
                             className={"form-control"}  />
                         </td>
                     </tr>
+                    <tr>
+                        <td>Harga Beli</td>
+                        <td>
+                            <input
+                             className={"form-control"}
+                             onChange={handleChange(setBuyingPrice)}
+                             value={buyingPrice}
+                             required={true}
+                             type={"number"}/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Harga Jual</td>
+                        <td>
+                            <input
+                             className={"form-control"}
+                             onChange={handleChange(setSellingPrice)}
+                             value={sellingPrice}
+                             required={true}
+                             type={"number"}/>
+                        </td>
+                    </tr>
+
                     {props.children}
                 </tbody>
             </table>

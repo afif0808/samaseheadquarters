@@ -14,9 +14,12 @@ export default function CreateAccessory(props) {
         },
         sku : {
             code : ""
+        },
+        price : {
+            selling_price : 0,
+            buying_price : 0,
         }
     }
-
     const [accessory , setAccessory] = useState(defaultAccessory)
     const [saveButtonDisabled , setSaveButtonDisabled] = useState(false)
     const [accsessoryFormVisible , setAccessoryFormVisible] = useState(true)
@@ -28,7 +31,6 @@ export default function CreateAccessory(props) {
                 alert("Success")
                 setAccessory(JSON.parse(JSON.stringify(defaultAccessory)))
                 setSaveButtonDisabled(false)
-   
             })
         }
     }
@@ -37,7 +39,10 @@ export default function CreateAccessory(props) {
         accessory.product.name = data.name
         accessory.stock.qty = parseInt(data.qty)
         accessory.stock.minimum_qty = parseInt(data.minimumQty)
+        accessory.price.buying_price = parseInt(data.buyingPrice)
+        accessory.price.selling_price = parseInt(data.sellingPrice)
     }
+
     return (
         <div>
             <h3 className={"m-3"}>Tambah Aksesoris</h3>
@@ -47,6 +52,8 @@ export default function CreateAccessory(props) {
                     className={"table"}
                     minimumQty={0}
                     qty={accessory.stock.qty}
+                    buyingPrice={accessory.price.buying_price}
+                    sellingPrice={accessory.price.selling_price}
                     code={accessory.sku.code}
                     name={accessory.product.name}>
                     <tr>
