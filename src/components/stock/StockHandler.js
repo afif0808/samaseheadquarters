@@ -1,6 +1,6 @@
 import { Config } from "../../Config"
 
-function UpdateStockById(stock) {
+async function UpdateStockBySKUId(stock) {
     var req = {
         method : "POST",
         headers : {
@@ -8,7 +8,8 @@ function UpdateStockById(stock) {
         },
         body : JSON.stringify({stock:stock}),
     }
-    return fetch(Config.apiSource+"/stocks/" + stock.id , req).then((resp)=>resp.json())
+    const resp = await fetch(Config.apiSource + "/stocks/" + stock.sku_id, req)
+    return await resp.json()
 }
 
-export {UpdateStockById}
+export {UpdateStockBySKUId}

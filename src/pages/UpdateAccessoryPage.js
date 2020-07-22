@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { UpdateStockById } from '../components/stock/StockHandler'
+import { UpdateStockBySKUId } from '../components/stock/StockHandler'
 import { UpdateProductById } from '../components/product/ProductHandler'
 import { UpdateSKUById } from '../components/sku/SKUHandler'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +13,7 @@ export default function UpdateAccessoryPage() {
     function handleEditFormSubmit() {
         return (e) => {
             e.preventDefault()
-            Promise.all([UpdateStockById(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(resp){
+            Promise.all([UpdateStockBySKUId(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(resp){
                 alert("Berhasil hore!")
                 history.push("/accessories/list")
                 console.log(resp)

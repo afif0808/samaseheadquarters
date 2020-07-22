@@ -27,7 +27,7 @@ export default function UpdateAccessoryPage() {
     function handleSubmit(e) {
         e.preventDefault()
             
-        Promise.all([UpdateStockById(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(){
+        Promise.all([UpdateStockBySKUId(sku.stock),UpdateProductById(sku.product),UpdateSKUById(sku)]).then(function(){
             alert("Berhasil hore!")
             history.push("/accessories/list")
 

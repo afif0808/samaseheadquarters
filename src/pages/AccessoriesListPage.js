@@ -6,6 +6,9 @@ import SearchBox from '../SearchBox'
 import WhiteScreen from '../WhiteScreen'
 import SKUItem from '../components/sku/SKUItem'
 import ConfirmationModal from '../ConfirmationModal'
+import BlackScreen from '../BlackScreen'
+import DateModal from '../DateModal'
+import { Config } from '../Config'
 
 
 
@@ -16,6 +19,8 @@ export default function AccessoriesListPage(props) {
     const [loaderVisible , setLoaderVisible] = useState(false)
     const [isAnyError , setIsAnyError] = useState(false)
     const [deleteModalVisible , setDeleteModalVisible] = useState(false) 
+    const [downloadModalVisible , setDownloadModalVisible] = useState(false) 
+
     const [pickedSKU , setPickedSKU] = useState(null)
     const [skuKeyword , setSKUKeyword] = useState("")
     const Loader = props.loader
@@ -90,6 +95,21 @@ export default function AccessoriesListPage(props) {
       )
     }
 
+    function downloadModal(visible) {
+      return (
+        <DateModal 
+        date={new Date().toJSON().split("T")[0]}
+        handleCancel={()=>{
+          setDownloadModalVisible(false)
+        }}
+        handleFormSubmit={(data)=>{
+          window.location.href=Config.apiSource+"/accessories/report/?date=" + data.date
+          setDownloadModalVisible(false)
+        }}
+        visible={visible} />
+      )
+    }
+    
     function deleteAccessory(sku) {
       DeleteSKUById(parseInt(sku.id)).then(function(resp){
         alert(JSON.stringify(resp))
@@ -99,7 +119,7 @@ export default function AccessoriesListPage(props) {
 
     return (
       <div>
-        
+        {downloadModal(downloadModalVisible)}
         <ConfirmationModal
           visible={deleteModalVisible} 
           handleOKClick={()=>{
@@ -119,9 +139,16 @@ export default function AccessoriesListPage(props) {
           </a>
         </WhiteScreen>
         <h3 className="p-3">Aksesoris</h3>
-        <Link className="btn btn-primary m-3" to={"/accessories/create"}>Tambah</Link>
+        <div style={{textAlign:"left"}}>
+         <Link className="btn btn-primary m-3" to={"/accessories/create"}>Tambah</Link>
+          <span 
+            onClick={()=>{
+              setDownloadModalVisible(true)
+            }}
+            className={"btn btn-primary text-light m-3"}>Unduh</span>
+        </div>
+
         <SearchBox handleSubmit={handleSearchSubmit} />
-        
         <SKUList 
         className={"table"}
         headRows={skuListHead()}>
