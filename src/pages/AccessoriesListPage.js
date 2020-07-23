@@ -62,23 +62,19 @@ export default function AccessoriesListPage(props) {
           // var className = ""
           var className = (sku.stock.qty <= sku.stock.minimum_qty) ? "text-danger font-weight-bold" : ""
           return (
-             <SKUItem className={className} sku={sku}>
+             <SKUItem
+              className={className} sku={sku}>
                <td>
                 <button 
-                  onClick={handleEditButtonClick(sku)} 
-                  className={"btn btn-primary m-2 d-none d-md-block"}>
-                  UBAH
+                  onClick={()=>{
+                    sessionStorage.setItem("sku",JSON.stringify(sku))
+                    history.push("/accessories/view")
+                  }}
+                  className={"btn btn-primary m-2 font-weight-bold "}>
+                  ->
                 </button>
                </td>
-              {/* <button 
-                onClick={()=>{
-                    setPickedSKU(sku)
-                    setDeleteModalVisible(true)
-                  }
-                }
-                className={"btn btn-outline-primary  m-2"}>
-                 HAPUS
-              </button> */}
+
              </SKUItem>
           ) 
          })
@@ -90,7 +86,6 @@ export default function AccessoriesListPage(props) {
       return (
         <tr>
           <td>Nama</td>
-          <td>Kode</td>
           <td>Jumlah</td>
           <td></td>
         </tr>
@@ -153,7 +148,7 @@ export default function AccessoriesListPage(props) {
         <SearchBox handleSubmit={handleSearchSubmit} />
         <SKUList 
         className={"table"}
-        headRows={skuListHead()}>
+        >
           {skuItems(skus)}  
         </SKUList>
      

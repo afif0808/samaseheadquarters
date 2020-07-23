@@ -19,6 +19,8 @@ import VendorsListPage from './pages/VendorsListPage';
 import CreateVendorPage from './pages/CreateVendorPage';
 import SupplierListPage from './pages/SupplierListPage';
 import CreateSupplierPage from './pages/CreateSupplierPage';
+import ViewAccessoryPage from './pages/AccessoryViewPage';
+import AccessoryViewPage from './pages/AccessoryViewPage';
 function App(props) {  
   return(
     <Router>
@@ -89,6 +91,11 @@ function App(props) {
               <Route path={"/suppliers/create"}>
                 <CreateSupplierPage loader={PageLoader}/>
               </Route>
+
+              <Route path={"/accessories/view"}>
+                <AccessoryViewPage loader={PageLoader}/>
+              </Route>
+
 
             </div>
           </div>
