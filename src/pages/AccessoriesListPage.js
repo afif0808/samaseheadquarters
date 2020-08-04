@@ -20,7 +20,8 @@ export default function AccessoriesListPage(props) {
     const [isAnyError , setIsAnyError] = useState(false)
     const [deleteModalVisible , setDeleteModalVisible] = useState(false) 
     const [downloadModalVisible , setDownloadModalVisible] = useState(false) 
-
+    const [skuImageViewVisible , setSKUImageViewVisible] = useState(false)
+    const [pickedSKUImage ,setPickedSKUImage] = useState(null)
     const [pickedSKU , setPickedSKU] = useState(null)
     const [skuKeyword , setSKUKeyword] = useState("")
     const Loader = props.loader
@@ -49,6 +50,36 @@ export default function AccessoriesListPage(props) {
       searchSKUs(data.keyword)
     }
 
+    function skuImageView(visible,skuImage) {
+      if(skuImage != null && visible) {
+        return (
+          <BlackScreen 
+            onClick={()=>{
+              setSKUImageViewVisible(false)
+            }}
+            visible={visible}>
+            <img  height={400} src={Config.apiSource+"/skuimages/"+skuImage.id} />        
+          </BlackScreen>
+        )  
+      }
+      return null
+    } 
+
+    function imageThumbnail(img) {
+
+      return (
+        <img 
+          width={"50"}  
+          style={{background:"f00",cursor:"pointer"}} 
+          height={"50"} 
+          onClick={()=>{
+            setSKUImageViewVisible(true)
+            setPickedSKUImage(img)
+          }}
+          src={Config.apiSource+"/skuimages/"+img.id} />
+      ) 
+    
+    }
     function skuItems(skus) {
       function handleEditButtonClick(sku) {
         return () => {
@@ -65,13 +96,18 @@ export default function AccessoriesListPage(props) {
              <SKUItem
               className={className} sku={sku}>
                <td>
+                 {sku.images != null &&
+                    imageThumbnail(sku.images[0])                 
+                 }
+               </td>
+               <td>
                 <button 
                   onClick={()=>{
                     sessionStorage.setItem("sku",JSON.stringify(sku))
                     history.push("/accessories/view")
                   }}
                   className={"btn btn-primary m-2 font-weight-bold "}>
-                  ->
+                  {"->"}
                 </button>
                </td>
 
@@ -116,6 +152,7 @@ export default function AccessoriesListPage(props) {
 
     return (
       <div>
+        {skuImageView(skuImageViewVisible,pickedSKUImage)}
         {downloadModal(downloadModalVisible)}
         <ConfirmationModal
           visible={deleteModalVisible} 
@@ -138,6 +175,8 @@ export default function AccessoriesListPage(props) {
         <h3 className="p-3">Aksesoris</h3>
         <div style={{textAlign:"left"}}>
          <Link className="btn btn-primary m-3" to={"/accessories/create"}>Tambah</Link>
+        
+
           <span 
             onClick={()=>{
               setDownloadModalVisible(true)

@@ -100,7 +100,6 @@ import SearchBox from '../SearchBox'
 
     function screenSetter(screen) {
         return ()=> {
-            alert("why")
             setScreen(screen)
         }
     }

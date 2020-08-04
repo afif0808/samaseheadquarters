@@ -13,7 +13,6 @@ async function CreateSKUIns(skuIns , skuInGroup) {
     return await resp.json()
 }
 async function GetSKUInsByGroupID(groupID) {
-    alert(Config.apiSource+"/skuingroups/" + groupID +  "/skuins")
     const resp = await fetch(Config.apiSource+"/skuingroups/" + groupID +  "/skuins")
     if(resp.ok == false) {
         throw Error("")
